@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//  provider = "postgresql"
+//  url      = env("DATABASE_URL")
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// begin: npx prisma migrate dev --preview-feature -> init -> npx prisma studio
+// down code => update DB: npx prisma db push --preview-feature
+model Project {
+  id Int @id @unique @default(autoincrement())
+  type String
+  name String
+  numberPeople Int
+  postalCode Int
+  image String
+  start_date DateTime
+  created_date DateTime  @default(now())
+}

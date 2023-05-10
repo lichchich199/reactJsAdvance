@@ -1,0 +1,28 @@
+{
+    "line": {
+        "OrderNumber": {
+            "title": "OrderNumber",
+            "type": "Text",
+            "length": 255,
+            "required": false,
+            "editable": true,
+            "blankable": true
+        },
+        "OrderName": {
+            "title": "OrderName",
+            "type": "Text",
+            "length": 255,
+            "required": false,
+            "editable": true,
+            "blankable": true
+        },
+        "OrderPrice": {
+            "title": "OrderPrice",
+            "type": "Text",
+            "length": 255,
+            "required": false,
+            "editable": true,
+            "blankable": true
+        }
+    }
+}
