@@ -1,8 +1,16 @@
 import { PrismaClient } from "@prisma/client";
+import NextCors from 'nextjs-cors';
 
 const prisma = new PrismaClient();
 
 export default async (req, res) => {
+    await NextCors(req, res, {
+        // Options
+        methods: ['POST'],
+        origin: '*',
+        optionsSuccessStatus: 200,
+      });
+
     if(req.method !== 'POST') {
         return res.status(405).json({message: 'Method not allowed'});
     }
