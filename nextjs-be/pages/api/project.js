@@ -15,8 +15,9 @@ export default async (req, res) => {
         return res.status(405).json({message: 'Method not allowed'});
     }
 
-    var projectData = req.body
+    var projectData = req.body;
     var project;
+    console.log('projectData', projectData)
     switch (projectData?.mode) {
         case 'GET':
             delete projectData.mode;
@@ -51,7 +52,13 @@ export default async (req, res) => {
             break;
         case 'GETLIST':
             delete projectData.mode;
-            project = await prisma.project.findMany();
+            project = await prisma.project.findMany({
+                where: {
+                    name: {
+                        contains: projectData.name || ''
+                    }
+                }
+            });
             break;
     
         default:

@@ -1,29 +1,33 @@
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
+
+import { getContact } from "./api";
+
+export async function loader({ params }) {
+    console.log(params)
+    const contact = await getContact(params);
+    console.log('contact', contact)
+    return { contact };
+    // return {}
+  }
 
 export default function Contact() {
-  const contact = {
-    first: "Your",
-    last: "Name",
-    avatar: "https://placekitten.com/g/200/200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  };
+    const { contact } = useLoaderData();
+    console.log('contact:', contact)
 
   return (
     <div id="contact">
       <div>
         <img
-          key={contact.avatar}
-          src={contact.avatar || null}
+          key={contact.image}
+          src={contact.image || null}
         />
       </div>
 
       <div>
         <h1>
-          {contact.first || contact.last ? (
+          {contact.type || contact.name ? (
             <>
-              {contact.first} {contact.last}
+              {contact.type} {contact.name}
             </>
           ) : (
             <i>No Name</i>
@@ -31,18 +35,8 @@ export default function Contact() {
           <Favorite contact={contact} />
         </h1>
 
-        {contact.twitter && (
-          <p>
-            <a
-              target="_blank"
-              href={`https://twitter.com/${contact.twitter}`}
-            >
-              {contact.twitter}
-            </a>
-          </p>
-        )}
-
-        {contact.notes && <p>{contact.notes}</p>}
+        {contact.numberPeople && <p>Number People: {contact.numberPeople}</p>}
+        {contact.postalCode && <p>Postal Code: {contact.postalCode}</p>}
 
         <div>
           <Form action="edit">
