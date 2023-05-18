@@ -1,32 +1,11 @@
-import { CircularProgress, Backdrop, makeStyles } from "@material-ui/core"
-import React from "react"
+import React from "react";
+import style from "./Loading.css";
 
-const Loading = (props) => {
-  const {isLoadingLine} = props
-  const useStyles = makeStyles((theme) => ({
-    backdrop: {
-      zIndex: theme.zIndex.modal + 1,
-      color: "#fff",
-    },
-    backdropline: {
-      position: "absolute",
-      zIndex: 1,
-      color: "#fff",
-      opacity: "0.8!important",
-    },
-    circularprogress: {
-      position: "absolute",
-      left: "560px",
-    },
-  }))
-
-  const classes = useStyles()
-
+export default function LoadingSpinner() {
   return (
-    <Backdrop className={isLoadingLine? classes.backdropline: classes.backdrop} open={true}>
-      <CircularProgress className = {isLoadingLine? classes.circularprogress: ""} color="inherit" size={isLoadingLine? 10: 40}/>
-    </Backdrop>
-  )
+    <div className='spinnerContainer'>
+      <div className='loadingSpinner'>
+      </div>
+    </div>
+  );
 }
-
-export default Loading

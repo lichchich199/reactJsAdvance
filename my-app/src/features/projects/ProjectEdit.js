@@ -11,11 +11,11 @@ import { updateContact } from "./api";
     const updates = Object.fromEntries(formData);
     console.log('formData', updates);
     // const updates = Object.fromEntries(formData);
-    await updateContact();
-    return redirect(`/contacts/${params.contactId}`);
+    await updateContact(updates);
+    return redirect(`/projects/${params.contactId}`);
   }
 
-export default function EditContact() {
+export default function ProjectEdit() {
   const { contact } = useLoaderData();
   const navigate = useNavigate();
   console.log('contact- line 18', contact)
@@ -23,6 +23,7 @@ export default function EditContact() {
   return (
     <Form method="post" id="contact-form">
       <p>
+
         <span>Name</span>
         <input
           placeholder="Name Project"
@@ -78,6 +79,11 @@ export default function EditContact() {
           defaultValue={contact.start_date}
         />
       </label>
+        <input
+            type="hidden"
+            name="id"
+            value={contact.id}
+            />
       <p>
         <button type="submit">Save</button>
         <button type="button" onClick={() => {

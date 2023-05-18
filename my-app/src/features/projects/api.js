@@ -27,38 +27,39 @@ export const getContacts = async (name) => {
 }
 
 export const createContact = async (params) => {
+    var body = {
+        "mode": "ADD",
+        "type": params.type,
+        "name": params.name,
+        "numberPeople":  parseInt(params.numberPeople),
+        "postalCode": parseInt(params.postalCode),
+        "image": params.image,
+        "start_date": params.startDate,
+    }
     const response = await fetch('http://localhost:3000/api/project', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            "mode": "ADD",
-            "type": "Hải sản",
-            "name": "Tôm Xú",
-            "numberPeople": 10,
-            "postalCode": 500012,
-            "image": "https://placekitten.com/g/200/200",
-            "start_date": "1970-01-01T00:00:00.000Z",
-            "created_date": "1970-01-01T00:00:00.000Z"
-        })
+        body: JSON.stringify(body)
     }).then(res => res.json())
     return  response
 }
 
 export const updateContact = async (params) => {
+    var body = {
+        "mode": "EDIT",
+        "id": parseInt(params.id),
+        "type": params.type,
+        "name": params.name,
+        "numberPeople":  parseInt(params.numberPeople),
+        "postalCode": parseInt(params.postalCode),
+        "image": params.image,
+        "start_date": params.startDate,
+    }
+    console.log(body)
     const response = await fetch('http://localhost:3000/api/project', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            "mode": "EDIT",
-            "id": 4,
-            "type": "Nuôi Trồng",
-            "name": "Thủy sản",
-            "numberPeople": 13,
-            "postalCode": 500013,
-            "image": "https://placekitten.com/g/200/200",
-            "start_date": "1970-02-01T00:00:00.000Z",
-            "created_date": "1970-02-01T00:00:00.000Z"
-        })
+        body: JSON.stringify(body)
     }).then(res => res.json())
     return  response
 }

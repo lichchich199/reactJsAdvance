@@ -1,6 +1,7 @@
-import { Outlet, useLoaderData, NavLink, Form, useNavigation, useSubmit } from "react-router-dom";
-import { getContacts, createContact } from './api';
 import { useEffect, useState } from "react";
+import { Outlet, useLoaderData, NavLink, Form, useNavigation, useSubmit } from "react-router-dom";
+
+import { getContacts, createContact } from "../features/projects/api";
 
 export async function loader({request }) {
     const url = new URL(request.url);
@@ -14,7 +15,7 @@ export async function action() {
     return { contact };
 }
 
-export default function Root() {
+export default function Project() {
     const { contacts, q} = useLoaderData();
     const [query, setQuery] = useState(q);
     const navigation = useNavigation();
@@ -56,7 +57,7 @@ export default function Root() {
                 aria-live="polite"
                 ></div>
             </Form>
-            <Form method="post">
+            <Form action="contacts/add">
                 <button type="submit">New</button>
             </Form>
             </div>
@@ -66,7 +67,7 @@ export default function Root() {
                   {contacts.map((contact) => (
                     <li key={contact.id}>
                         <NavLink
-                            to={`contacts/${contact.id}`}
+                            to={`projects/${contact.id}`}
                             className={({ isActive, isPending }) =>
                             isActive ? "active" : isPending ? "pending" : ""
                             }

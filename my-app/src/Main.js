@@ -1,11 +1,12 @@
 import { Provider } from "react-redux"
-import {RouterProvider} from 'react-router-dom';
-import useRoutes from './hooks/useRoutes';
+import {RouterProvider, createBrowserRouter} from 'react-router-dom';
+
 import './main.css'
 import store from "./store"
+import {routes} from './router'
 
 function Main() {
-const router = useRoutes()
+let router = createBrowserRouter(routes)
   return (
     <>
         <Provider store={store}>
