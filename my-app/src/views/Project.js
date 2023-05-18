@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Outlet, useLoaderData, NavLink, Form, useNavigation, useSubmit } from "react-router-dom";
+import { Outlet, useLoaderData, NavLink, Form, useNavigation, useSubmit, redirect } from "react-router-dom";
 
 import { getContacts, createContact } from "../features/projects/api";
 
@@ -23,12 +23,16 @@ export default function Project() {
     useEffect(() => {
         setQuery(q);
       }, [q]);
-      const submit = useSubmit();
-      const searching =
-      navigation.location &&
-      new URLSearchParams(navigation.location.search).has(
-        "q"
-      );
+    const submit = useSubmit();
+    const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has(
+      "q"
+    );
+
+    function redirectRow(url) {
+      return redirect(url);
+    }
     return (
         <>
           <div id="sidebar">
@@ -61,7 +65,7 @@ export default function Project() {
                 <button type="submit">New</button>
             </Form>
             </div>
-            <nav>
+            {/* <nav>
               {contacts.length ? (
                 <ul>
                   {contacts.map((contact) => (
@@ -89,7 +93,42 @@ export default function Project() {
                   <i>No contacts</i>
                 </p>
               )}
-            </nav>
+            </nav> */}
+
+            <table>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Number People</th>
+                <th>Start Date</th>
+              </tr>
+                  {contacts.map((contact) => (
+                    <tr onClick={()=> {redirectRow(`projects/${contact.id}`)}} className={({ isActive, isPending }) =>
+                            isActive ? "active" : isPending ? "pending" : ""}>
+                        {/* <NavLink
+                            to={`projects/${contact.id}`}
+                            className={({ isActive, isPending }) =>
+                            isActive ? "active" : isPending ? "pending" : ""
+                            }
+                        > */}
+                        <td>{contact.id}</td>
+                        <td>{contact.name}</td>
+                        <td>{contact.type}</td>
+                        <td>{contact.numberPeople}</td>
+                        <td>{contact.start_date}</td>
+                        {/* {contact.type || contact.name ? (
+                          <>
+                            {contact.type} - {contact.name}
+                          </>
+                        ) : (
+                          <i>No Name</i>
+                        )}{" "} */}
+
+                      {/* </NavLink> */}
+                    </tr>
+                  ))}
+            </table>
           </div>
           <div id="detail" className={
           navigation.state === "loading" ? "loading" : ""

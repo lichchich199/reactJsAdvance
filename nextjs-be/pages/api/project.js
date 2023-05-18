@@ -17,7 +17,6 @@ export default async (req, res) => {
 
     var projectData = req.body;
     var project;
-    console.log('projectData', projectData)
     switch (projectData?.mode) {
         case 'GET':
             delete projectData.mode;
