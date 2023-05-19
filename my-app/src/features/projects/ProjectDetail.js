@@ -6,7 +6,6 @@ import { useState } from "react";
 
 export async function loader({ params }) {
   const contact = await getContact(params);
-  console.log('contact', contact)
   return { contact };
   // return {}
 }
@@ -16,7 +15,6 @@ export default function ProjectDetail() {
 
     const { contact } = useLoaderData();
 
-    console.log('contact:', contact)
 
   return (
     <>
