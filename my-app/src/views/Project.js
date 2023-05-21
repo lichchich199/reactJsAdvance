@@ -75,7 +75,7 @@ export default function Project() {
                     aria-live="polite"
                     ></div>
                 </Form>
-                <Form action="contacts/add">
+                <Form action="projects/add">
                     <button type="submit">New</button>
                 </Form>
                 </div>
@@ -99,7 +99,7 @@ export default function Project() {
                                     <span style={{float: 'right',color: '#eeb004'}}>Start date</span>
                                 </li>
                             {contacts.map((contact) => (
-                                <li key={contact.id}>
+                                <li key={contact.id} onClick={()=> {handleRowClick(contact.id)}}>
                                     <NavLink to={`projects/${contact.id}`} className={({ isActive, isPending }) => isActive ? "active" : isPending ? "pending" : ""} >
                                         {contact.name ? (<> {contact.name} </>) : (<i>No Name</i>)}{" "}
                                         {contact.start_date && <span>{contact.start_date}</span>}

@@ -1,47 +1,62 @@
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, useParams } from "react-router-dom";
 
+import { useDispatch, useSelector} from 'react-redux'
 import { getContact } from "./api";
 import Loading from '../../components/commons/Loading'
-import { useState } from "react";
+import { useEffect } from "react";
+import { getContactAsync } from "./slices";
+import Popup from 'reactjs-popup';
+import Modal from "../../components/commons/Modal";
+import useGetLocation from "../../hooks/useGetLocation";
 
 export async function loader({ params }) {
   const contact = await getContact(params);
   return { contact };
-  // return {}
 }
-
+const basePath = "https://fastly-production.24c.in/webin/360";
 export default function ProjectDetail() {
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch()
+  const {loadingStatus} = useSelector(state => state.global);
 
-    const { contact } = useLoaderData();
+  const { projectId } = useParams()
+  const {project} = useSelector(state => state.project);
+  
+  useEffect(() => {
+    dispatch(getContactAsync({projectId: projectId}))
+  }, [projectId])
 
+  var location = useGetLocation();
+  console.log('location', location)
 
   return (
     <>
-      {isLoading ? <Loading /> : 
-      <div id="contact">
+      {loadingStatus ? <Loading /> : 
+      <div id="project">
         <div>
           <img
-            key={contact.image}
-            src={contact.image || null}
+            key={project.image}
+            src={project.image || null}
             alt=""
           />
         </div>
+        <Popup modal trigger={<button>View to 360</button>}>
+            {close => <Modal close={close} imagePath={basePath}/>}
+        </Popup>
 
         <div>
           <h1>
-            {contact.type || contact.name ? (
+            {project.type || project.name ? (
               <>
-                {contact.type} {contact.name}
+                {project.type} {project.name}
               </>
             ) : (
               <i>No Name</i>
             )}{" "}
-            <Favorite contact={contact} />
+            <Favorite project={project} />
           </h1>
 
-          {contact.numberPeople && <p>Number People: {contact.numberPeople}</p>}
-          {contact.postalCode && <p>Postal Code: {contact.postalCode}</p>}
+          {project.numberPeople && <p>Number People: {project.numberPeople}</p>}
+          {project.postalCode && <p>Postal Code: {project.postalCode}</p>}
 
           <div>
             <Form action="edit">
@@ -64,9 +79,9 @@ export default function ProjectDetail() {
   );
 }
 
-function Favorite({ contact }) {
+function Favorite({ project }) {
   // yes, this is a `let` for later
-  let favorite = contact.favorite;
+  let favorite = project.favorite;
   return (
     <Form method="post">
       <button

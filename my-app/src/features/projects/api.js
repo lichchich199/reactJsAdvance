@@ -1,14 +1,12 @@
-// import axios from '../axios'
-
 export const getContact = async (params) => {
-    if(!params || !params.contactId) {
+    if(!params || !params.projectId) {
         return {}
     }
     return  await fetch('http://localhost:3000/api/project', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          id: parseInt(params.contactId) || -1,
+          id: parseInt(params.projectId) || -1,
           mode: 'GET'
         })
     }).then(res => res.json()).catch()

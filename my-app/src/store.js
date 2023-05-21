@@ -1,10 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
-import slices from "./features/login/slices";
+import { configureStore } from "./features/toolkit";
+import globalReducer from "./features/global/slices";
+import projectReducer from "./features/projects/slices";
 
 
 export default configureStore({
     reducer: {
-        task: slices,
-        // user: userReducer
+        global: globalReducer,
+        project: projectReducer
     }
 })

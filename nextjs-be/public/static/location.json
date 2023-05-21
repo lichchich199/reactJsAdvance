@@ -1,0 +1,122 @@
+[
+	{
+		"id": 1,
+        "name": "Hải Phòng",
+		"postalCodeMin": "04000",
+		"postalCodeMax": "05000",
+		"lat": "20.865139",
+		"lon": "106.683830"
+	},
+	{
+		"id": 2,
+		"name": "Sóc Trăng",
+		"postalCodeMin": "96000",
+		"postalCodeMax": "96000",
+		"lat": "9.602521",
+		"lon": "105.973907"
+	},
+	{
+		"id": 3,
+		"name": "Thừa Thiên Huế",
+		"postalCodeMin": "49000",
+		"postalCodeMax": "49000",
+		"lat": "16.463713",
+		"lon": "107.590866"
+	},
+	{
+		"id": 4,
+		"name": "Bình Dương",
+		"postalCodeMin": "75000",
+		"postalCodeMax": "75000",
+		"lat": "10.924067",
+		"lon": "106.713028"
+	},
+	{
+		"id": 5,
+		"name": "Nghệ An",
+		"postalCodeMin": "43000",
+		"postalCodeMax": "44000",
+		"lat": "18.679585",
+		"lon": "105.681335"
+	},
+	{
+		"id": 6,
+		"name": "Quảng Ninh",
+		"postalCodeMin": "01000",
+		"postalCodeMax": "02000",
+		"lat": "20.959902",
+		"lon": "107.042542"
+	},
+	{
+		"id": 7,
+		"name": "Đà Nẵng",
+		"postalCodeMin": "50000",
+		"postalCodeMax": "50000",
+		"lat": "16.047079",
+		"lon": "108.206230"
+	},
+	{
+		"id": 8,
+		"name": "Hà Nội",
+		"postalCodeMin": "10000",
+		"postalCodeMax": "14000",
+		"lat": "21.028511",
+		"lon": "105.804817"
+	},
+	{
+		"id": 9,
+		"name": "Cần Thơ",
+		"postalCodeMin": "94000",
+		"postalCodeMax": "94000",
+		"lat": "10.045162",
+		"lon": "105.746857"
+	},
+	{
+		"id": 10,
+		"name": "Đồng Nai",
+		"postalCodeMin": "76000",
+		"postalCodeMax": "76000",
+		"lat": "10.964112",
+		"lon": "106.856461"
+	},
+	{
+		"id": 11,
+		"name": "Cao Bằng",
+		"postalCodeMin": "21000",
+		"postalCodeMax": "21000",
+		"lat": "22.679281",
+		"lon": "106.260452"
+	},
+	{
+		"id": 12,
+		"name": "Thanh Hóa",
+		"postalCodeMin": "40000",
+		"postalCodeMax": "42000",
+		"lat": "20.351387",
+		"lon": "105.221214"
+	},
+	{
+		"id": 13,
+		"name": "Yên Bái",
+		"postalCodeMin": "33000",
+		"postalCodeMax": "33000",
+		"lat": "21.716768",
+		"lon": "104.898590"
+	},
+	{
+		"id": 14,
+		"name": "Tây Ninh",
+		"postalCodeMin": "80000",
+		"postalCodeMax": "80000",
+		"lat": "11.375031",
+		"lon": "106.131363"
+	},
+	{
+		"id": 15,
+		"name": "Hồ Chí Minh",
+		"postalCodeMin": "70000",
+		"postalCodeMax": "74000",
+		"lat": "10.762622",
+		"lon": "106.660172"
+	}
+]

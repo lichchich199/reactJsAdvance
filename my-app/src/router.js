@@ -21,9 +21,8 @@ export const routes = [
                 element: <Index/>
             },
             {
-                path: "projects/:contactId",
-                element: <ProjectDetail />,
-                loader: contactLoader
+                path: "projects/:projectId",
+                element: <ProjectDetail />
             },
             {
                 path: "projects/:contactId/edit",

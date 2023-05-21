@@ -8,8 +8,10 @@
   "dependencies": {
     "@prisma/client": "^4.14.0",
     "cors": "^2.8.5",
+    "fs": "^0.0.1-security",
     "next": "latest",
     "nextjs-cors": "^2.1.2",
+    "path": "^0.12.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

@@ -7,10 +7,10 @@ const Todos = ({ todos, addTodo }) => {
   const [data] = useFetch("https://jsonplaceholder.typicode.com/todos");
   return (
     <>
-      {/* {data &&
+      {data &&
         data.map((item) => {
           return <p key={item.id}>{item.title}</p>;
-        })} */}
+        })}
         <h1>hi</h1>
         <Outlet />
     </>
