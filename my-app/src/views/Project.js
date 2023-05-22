@@ -19,7 +19,6 @@ export async function action() {
 }
 
 export default function Project() {
-    console.log('render')
     const { contacts, q} = useLoaderData();
     const [query, setQuery] = useState(q);
     const [listStatus, setListStatus] = useState(true);

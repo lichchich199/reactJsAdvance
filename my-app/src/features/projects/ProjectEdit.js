@@ -12,7 +12,7 @@ import { updateContact } from "./api";
     console.log('formData', updates);
     // const updates = Object.fromEntries(formData);
     await updateContact(updates);
-    return redirect(`/projects/${params.contactId}`);
+    return redirect(`/projects/${params.projectId}`);
   }
 
 export default function ProjectEdit() {
@@ -48,7 +48,7 @@ export default function ProjectEdit() {
           placeholder="https://example.com/avatar.jpg"
           aria-label="Image URL"
           type="text"
-          name="avatar"
+          name="image"
           defaultValue={contact.image}
         />
       </label>

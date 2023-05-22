@@ -25,7 +25,7 @@ export const routes = [
                 element: <ProjectDetail />
             },
             {
-                path: "projects/:contactId/edit",
+                path: "projects/:projectId/edit",
                 element: <ProjectEdit />,
                 loader: contactLoader,
                 action: editAction
@@ -36,7 +36,7 @@ export const routes = [
                 action: addAction
             },
             {
-                path: "projects/:contactId/delete",
+                path: "projects/:projectId/delete",
                 action: deleteAction,
                 errorElement: <div>Oops! There was an error.</div>,
             }
