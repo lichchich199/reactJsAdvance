@@ -3,11 +3,6 @@ import React from "react";
 import './modalThreeSixty.css'
 import ThreeSixty from "react-360-view";
 import { Link } from "react-router-dom";
-//content.js
-import React from "react";
-import './modalThreeSixty.css'
-import ThreeSixty from "react-360-view";
-import { Link } from "react-router-dom";
 
 
 export default function ModalWeather({ close, data }) {

@@ -6,8 +6,11 @@ import Loading from '../../components/commons/loading/Loading'
 import { useEffect, useState } from "react";
 import { getContactAsync } from "./slices";
 import Popup from 'reactjs-popup';
-import Modal from "../../components/commons/Modal";
-import useGetLocation from "../../hooks/useGetLocation";
+import ModalThreeSixty from "../../components/project/ModalThreeSixty";
+import ModalWeather from "../../components/project/ModalWeather";
+
+import Button from 'react-bootstrap/Button';
+import Modal, { ModalBody, ModalFooter, ModalHeader } from "../../components/commons/modal/Modal";
 
 export async function loader({ params }) {
   console.log(params)
@@ -21,13 +24,46 @@ export default function ProjectDetail() {
 
   const {loadingStatus} = useSelector(state => state.global);
   const {project} = useSelector(state => state.project);
-  
+  const [weather, setWeather] = useState({});
+  const { projectId } = useParams()
+  const [show, setShow] = useState(false);
+  const postalCode = project.postalCode;
+
   useEffect(() => {
     dispatch(getContactAsync({projectId: projectId}))
   }, [projectId])
 
-  var location = useGetLocation();
-  console.log('location', location)
+  useEffect(() => {
+    var location = async () => {
+      var res = await getLocation('04000');
+      var result = JSON.parse(res);
+      var dataLocation = result[0];
+      var weatherByLatLon = await getWeather(dataLocation.lat, dataLocation.lon)
+      setWeather(weatherByLatLon)
+    }
+    location()
+  }, [])
+
+  const handleClose = () => setShow(false);
+  const handleShow = (postalCode) => {
+    setShow(true)
+    console.log('postalCode', postalCode)
+    var location = async () => {
+      var res = await getLocation(postalCode);
+      var result = JSON.parse(res);
+      console.log('result', result)
+      var dataLocation = {}
+      if(result.length > 0) {
+        console.log('????/')
+        dataLocation = result[0]
+      }
+      console.log('datalocation', dataLocation)
+      var weatherByLatLon = await getWeather(dataLocation?.lat, dataLocation?.lon)
+      setWeather(weatherByLatLon)
+    }
+    location()
+  };
+
 
   return (
     <>
@@ -40,20 +76,16 @@ export default function ProjectDetail() {
             {close => <ModalThreeSixty close={close} imagePath={basePath}/>}
         </Popup>
         <div>
-          <h1>
-            {project.type || project.name ? (
-              <>
-                {project.type} {project.name}
-              </>
-            ) : (
-              <i>No Name</i>
-            )}{" "}
-            <Favorite project={project} />
-          </h1>
-
-          {project.numberPeople && <p>Number People: {project.numberPeople}</p>}
-          {project.postalCode && <p>Postal Code: {project.postalCode}</p>}
-
+          <h1>{project.type || project.name ? (<>{project.type} {project.name}</>) : (<i>No Name</i>)}</h1>
+          {
+            project.numberPeople && <p>Number People: {project.numberPeople}</p>
+          }
+          {
+            project.postalCode && <span>Postal Code: {project.postalCode}</span>
+          } 
+          {
+            project.postalCode && <Button variant="primary" value={postalCode} onClick={(e)=> {handleShow(e.target.value)}}>View weather infomation</Button>
+          }
           <div>
             <Form action="edit">
               <button type="submit">Edit</button>
@@ -65,29 +97,23 @@ export default function ProjectDetail() {
               <button type="submit">Delete</button>
             </Form>
           </div>
+          <Modal show={show}>
+                  <ModalHeader title='Weather infomation'/>
+                  <ModalBody>
+                    <ModalWeather data={weather}/>
+                  </ModalBody>
+                  <ModalFooter>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                      <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                      </Button>
+                  </ModalFooter>
+          </Modal>
         </div>
       </div>
       }
     </>
-  );
-}
-
-function Favorite({ project }) {
-  // yes, this is a `let` for later
-  let favorite = project.favorite;
-  return (
-    <Form method="post">
-      <button
-        name="favorite"
-        value={favorite ? "false" : "true"}
-        aria-label={
-          favorite
-            ? "Remove from favorites"
-            : "Add to favorites"
-        }
-      >
-        {favorite ? "★" : "☆"}
-      </button>
-    </Form>
   );
 }
