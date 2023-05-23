@@ -1,5 +1,4 @@
 import {
-    redirect,
     useNavigate,
     useParams
   } from "react-router-dom";

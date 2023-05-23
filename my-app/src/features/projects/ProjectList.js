@@ -22,9 +22,11 @@ export default function ProjectList() {
     const [searchParams, setSearchParams] = useSearchParams();
     const {projects, statusAction} = useSelector(state => state.project);
 
-    var q = searchParams.get("q")
+    var q = searchParams.get("q") 
+    console.log('sesion', sessionStorage.getItem("q"))
 
     useEffect(() => {
+        sessionStorage.setItem("q", q);
         dispatch(getProjectsAsync(q))
       }, [q, statusAction])
       

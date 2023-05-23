@@ -36,7 +36,6 @@ export default function ProjectDetail() {
   const handleClose = () => setShow(false);
   const handleShow = (postalCode) => {
     setShow(true)
-    console.log('postalCode', postalCode)
     var location = async () => {
       var res = await getLocation(postalCode);
       var result = JSON.parse(res);
