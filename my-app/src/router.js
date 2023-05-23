@@ -2,8 +2,8 @@ import ErrorPage from "./components/organisms/ErrorPage";
 import Index from "./features/projects";
 import Project from "./views/Project"
 import ProjectAdd from "./features/projects/ProjectAdd";
-import ProjectDetail, { loader as contactLoader } from "./features/projects/ProjectDetail";
-import ProjectEdit, { action as editAction} from "./features/projects/ProjectEdit";
+import ProjectDetail from "./features/projects/ProjectDetail";
+import ProjectEdit from "./features/projects/ProjectEdit";
 import { loader as rootLoader} from "./features/projects/ProjectList";
 
 export const routes = [
@@ -24,8 +24,6 @@ export const routes = [
             {
                 path: "projects/:projectId/edit",
                 element: <ProjectEdit />,
-                loader: contactLoader,
-                action: editAction
             },
             {
                 path: "projects/add",
