@@ -1,12 +1,11 @@
 import ErrorPage from "./components/organisms/ErrorPage";
 import Index from "./features/projects";
-import Project, {loader as rootLoader, action as rootAction} from "./views/Project"
+import Project from "./views/Project"
 import ProjectAdd, { action as addAction } from "./features/projects/ProjectAdd";
 import ProjectDetail, { loader as contactLoader } from "./features/projects/ProjectDetail";
 import ProjectEdit, { action as editAction} from "./features/projects/ProjectEdit";
 import { action as deleteAction } from "./features/projects/ProjectDelete";
-import Login from "./views/Login";
-
+import { loader as rootLoader} from "./features/projects/ProjectList";
 
 export const routes = [
     {
@@ -14,7 +13,6 @@ export const routes = [
         element: <Project/>,
         errorElement: <ErrorPage/>,
         loader: rootLoader,
-        action: rootAction,
         children: [
             {
                 index: true,
@@ -44,6 +42,5 @@ export const routes = [
     },
     {
         path: "login",
-        element: <Login />,
     }
 ]

@@ -387,3 +387,15 @@ html {
     justify-content: center;
     width: 100%;
   }
+
+.loading {
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.wrapLayout {
+    width: 100%;
+    display: flex;
+
+}

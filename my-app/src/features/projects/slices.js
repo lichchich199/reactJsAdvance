@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "../toolkit";
-import { createContact, deleteContact, getContact, getContacts, updateContact } from "./api";
+import { createProject, deleteProject, getProject, getProjects, updateProject } from "./api";
 
 const initialState = {
     status: false,
@@ -7,42 +7,42 @@ const initialState = {
     projects: []
 }
 
-export const getContactAsync = createAsyncThunk(
-    'projects/getContact',
+export const getProjectAsync = createAsyncThunk(
+    'projects/getProject',
     async(params) => {
-        const res = await getContact(params)
+        const res = await getProject(params)
         return res
     }
 )
 
-export const getContactsAsync = createAsyncThunk(
-    'projects/getContacts',
+export const getProjectsAsync = createAsyncThunk(
+    'projects/getProjects',
     async(name) => {
-        const res = await getContacts(name)
+        const res = await getProjects(name)
         return res
     }
 )
 
-export const createContactAsync = createAsyncThunk(
-    'projects/createContact',
+export const createProjectAsync = createAsyncThunk(
+    'projects/createProject',
     async(params) => {
-        const res = await createContact(params)
+        const res = await createProject(params)
         return res
     }
 )
 
-export const updateContactAsync = createAsyncThunk(
-    'projects/updateContact',
+export const updateProjectAsync = createAsyncThunk(
+    'projects/updateProject',
     async(params) => {
-        const res = await updateContact(params)
+        const res = await updateProject(params)
         return res
     }
 )
 
-export const deleteContactAsync = createAsyncThunk(
-    'projects/deleteContact',
+export const deleteProjectAsync = createAsyncThunk(
+    'projects/deleteProject',
     async(params) => {
-        const res = await deleteContact(params)
+        const res = await deleteProject(params)
         return res
     }
 )
@@ -57,50 +57,51 @@ export const projectSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getContactAsync.pending, (state) => {
+            .addCase(getProjectAsync.pending, (state) => {
                 state.status = true
             })
-            .addCase(getContactAsync.fulfilled, (state, action) => {
+            .addCase(getProjectAsync.fulfilled, (state, action) => {
                 state.project = action.payload
                 state.status = false
             })
-            .addCase(getContactAsync.rejected, (state) => {
+            .addCase(getProjectAsync.rejected, (state) => {
                 state.status = false
             })
-            .addCase(getContactsAsync.pending, (state) => {
+            .addCase(getProjectsAsync.pending, (state) => {
                 state.status = true
             })
-            .addCase(getContactsAsync.fulfilled, (state) => {
+            .addCase(getProjectsAsync.fulfilled, (state, action) => {
+                state.projects = action.payload
                 state.status = false
             })
-            .addCase(getContactsAsync.rejected, (state) => {
+            .addCase(getProjectsAsync.rejected, (state) => {
                 state.status = false
             })
-            .addCase(createContactAsync.pending, (state) => {
+            .addCase(createProjectAsync.pending, (state) => {
                 state.status = true
             })
-            .addCase(createContactAsync.fulfilled, (state) => {
+            .addCase(createProjectAsync.fulfilled, (state) => {
                 state.status = false
             })
-            .addCase(createContactAsync.rejected, (state) => {
+            .addCase(createProjectAsync.rejected, (state) => {
                 state.status = false
             })
-            .addCase(updateContactAsync.pending, (state) => {
+            .addCase(updateProjectAsync.pending, (state) => {
                 state.status = true
             })
-            .addCase(updateContactAsync.fulfilled, (state) => {
+            .addCase(updateProjectAsync.fulfilled, (state) => {
                 state.status = false
             })
-            .addCase(updateContactAsync.rejected, (state) => {
+            .addCase(updateProjectAsync.rejected, (state) => {
                 state.status = false
             })
-            .addCase(deleteContactAsync.pending, (state) => {
+            .addCase(deleteProjectAsync.pending, (state) => {
                 state.status = true
             })
-            .addCase(deleteContactAsync.fulfilled, (state) => {
+            .addCase(deleteProjectAsync.fulfilled, (state) => {
                 state.status = false
             })
-            .addCase(deleteContactAsync.rejected, (state) => {
+            .addCase(deleteProjectAsync.rejected, (state) => {
                 state.status = false
             })
     }

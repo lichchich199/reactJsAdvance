@@ -3,6 +3,9 @@
     font-size: 12px;
     background-color: antiquewhite;
   }
+  .test .modal-body {
+    background-color: antiquewhite;
+  }
   .test > .header {
     width: 100%;
     border-bottom: 1px solid gray;

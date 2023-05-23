@@ -4,14 +4,14 @@ import {
     redirect,
     useNavigate
   } from "react-router-dom";
-import { updateContact } from "./api";
+import { updateProject } from "./api";
   
   export async function action({ request, params }) {
     const formData = await request.formData();
     const updates = Object.fromEntries(formData);
     console.log('formData', updates);
     // const updates = Object.fromEntries(formData);
-    await updateContact(updates);
+    await updateProject(updates);
     return redirect(`/projects/${params.projectId}`);
   }
 

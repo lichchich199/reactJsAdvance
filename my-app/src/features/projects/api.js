@@ -1,4 +1,4 @@
-export const getContact = async (params) => {
+export const getProject = async (params) => {
     if(!params || !params.projectId) {
         return {}
     }
@@ -12,7 +12,7 @@ export const getContact = async (params) => {
     }).then(res => res.json()).catch()
 }
 
-export const getContacts = async (name) => {
+export const getProjects = async (name) => {
     const response = await fetch('http://localhost:3000/api/project', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -24,7 +24,7 @@ export const getContacts = async (name) => {
     return  response
 }
 
-export const createContact = async (params) => {
+export const createProject = async (params) => {
     var body = {
         "mode": "ADD",
         "type": params.type,
@@ -42,7 +42,7 @@ export const createContact = async (params) => {
     return  response
 }
 
-export const updateContact = async (params) => {
+export const updateProject = async (params) => {
     var body = {
         "mode": "EDIT",
         "id": parseInt(params.id),
@@ -62,7 +62,7 @@ export const updateContact = async (params) => {
     return  response
 }
 
-export const deleteContact = async (id) => {
+export const deleteProject = async (id) => {
     const response = await fetch('http://localhost:3000/api/project', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

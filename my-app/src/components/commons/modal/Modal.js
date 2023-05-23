@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function ModalCustom(props) {
   return (
-    <Modal show={props.show} onHide={props.handleClose}>
+    <Modal className='modalCustom' show={props.show} onHide={props.handleClose}>
         {props.children}
     </Modal>
   )

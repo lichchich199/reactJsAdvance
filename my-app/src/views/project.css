@@ -1,15 +1,5 @@
-Dựng web View dự án (bao gồm danh sách, thêm sửa xóa) có thể view ảnh, ảnh 360(nếu được)						
-Áp dụng redux để khi vào site, hoặc thực hiện action thì hiển thị loading( full screen, opacity 0.5)						
-						
-Dụng dynamic routers để chuyển page khi view các item.						
-						
-						
-Dự án có mã zip thành phố -> view được thời tiết của thành phố đó theo lat lon của mã zip đấy  (Áp dụng query parram) dùng các api free có thông tin thời tiết theo lat,lon của các thành phố lớn (api weather,...)						
+có thể view ảnh, ảnh 360(nếu được)																			
 Lưu được giá trị search lần cuối cùng khi vào trang danh sách						
 						
 						
-Chuyển được view dạng bảng và view dạng grid						
-
-
-// api thoi tiet 
-https://api.openweathermap.org/data/2.5/weather?lat=21.028511&lon=105.804817&appid=8d2de98e089f1c28e1a22fc19a24ef04
+			

@@ -1,10 +1,9 @@
 import { Form, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector} from 'react-redux'
-import { getContact, getLocation, getWeather } from "./api";
-import Loading from '../../components/commons/loading/Loading'
+import { getProject, getLocation, getWeather } from "./api";
 import { useEffect, useState } from "react";
-import { getContactAsync } from "./slices";
+import { getProjectAsync } from "./slices";
 import Popup from 'reactjs-popup';
 import ModalThreeSixty from "../../components/project/ModalThreeSixty";
 import ModalWeather from "../../components/project/ModalWeather";
@@ -14,7 +13,7 @@ import Modal, { ModalBody, ModalFooter, ModalHeader } from "../../components/com
 
 export async function loader({ params }) {
   console.log(params)
-  const contact = await getContact(params);
+  const contact = await getProject(params);
   return { contact };
 }
 const  basePath = "https://fastly-production.24c.in/webin/360";
@@ -22,7 +21,6 @@ const  basePath = "https://fastly-production.24c.in/webin/360";
 export default function ProjectDetail() {
   const dispatch = useDispatch()
 
-  const {loadingStatus} = useSelector(state => state.global);
   const {project} = useSelector(state => state.project);
   const [weather, setWeather] = useState({});
   const { projectId } = useParams()
@@ -30,7 +28,7 @@ export default function ProjectDetail() {
   const postalCode = project.postalCode;
 
   useEffect(() => {
-    dispatch(getContactAsync({projectId: projectId}))
+    dispatch(getProjectAsync({projectId: projectId}))
   }, [projectId])
 
   useEffect(() => {
@@ -67,7 +65,7 @@ export default function ProjectDetail() {
 
   return (
     <>
-      {loadingStatus ? <Loading /> : 
+      {
       <div id="project">
         <div>
           <img key={project.image} src={project.image || null} alt=""/>
@@ -76,7 +74,7 @@ export default function ProjectDetail() {
             {close => <ModalThreeSixty close={close} imagePath={basePath}/>}
         </Popup>
         <div>
-          <h1>{project.type || project.name ? (<>{project.type} {project.name}</>) : (<i>No Name</i>)}</h1>
+          <h1>{project.type || project.name ? (<>{project.name}</>) : (<i>No Name</i>)}</h1>
           {
             project.numberPeople && <p>Number People: {project.numberPeople}</p>
           }
@@ -105,9 +103,6 @@ export default function ProjectDetail() {
                   <ModalFooter>
                       <Button variant="secondary" onClick={handleClose}>
                         Close
-                      </Button>
-                      <Button variant="primary" onClick={handleClose}>
-                        Save Changes
                       </Button>
                   </ModalFooter>
           </Modal>
