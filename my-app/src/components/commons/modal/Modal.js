@@ -9,7 +9,7 @@ export default function ModalCustom(props) {
   )
 }
 export const ModalHeader = props => {
-    return (<Modal.Header closeButton>
+    return (<Modal.Header>
         <Modal.Title>{props.title}</Modal.Title>
   </Modal.Header>)
 }

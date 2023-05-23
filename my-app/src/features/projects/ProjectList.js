@@ -20,14 +20,14 @@ export default function ProjectList() {
     const [listStatus, setListStatus] = useState(true);
     const [selectedRow, setSelectedRow] = useState(-1);
     const [searchParams, setSearchParams] = useSearchParams();
-    const {projects} = useSelector(state => state.project);
+    const {projects, statusAction} = useSelector(state => state.project);
 
     var q = searchParams.get("q")
 
     useEffect(() => {
         dispatch(getProjectsAsync(q))
-      }, [q])
-
+      }, [q, statusAction])
+      
     function handleRowClick(id) {
         setSelectedRow(id)
       return navigate(`projects/${id}`);

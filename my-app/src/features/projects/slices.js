@@ -3,6 +3,7 @@ import { createProject, deleteProject, getProject, getProjects, updateProject } 
 
 const initialState = {
     status: false,
+    statusAction: false,
     project: {},
     projects: []
 }
@@ -42,7 +43,8 @@ export const updateProjectAsync = createAsyncThunk(
 export const deleteProjectAsync = createAsyncThunk(
     'projects/deleteProject',
     async(params) => {
-        const res = await deleteProject(params)
+        console.log('param:', params)
+        const res = await deleteProject(parseInt(params))
         return res
     }
 )
@@ -53,6 +55,9 @@ export const projectSlice = createSlice({
     reducers: {
         cleanup: (state) => {
             state.status = false
+        },
+        changeStatusAction: (state) => {
+            state.statusAction = !state.statusAction
         }
     },
     extraReducers: (builder) => {
@@ -110,6 +115,7 @@ export const projectSlice = createSlice({
 
 
 export const {
-    cleanup
+    cleanup,
+    changeStatusAction
 } = projectSlice.actions;
 export default projectSlice.reducer

@@ -1,9 +1,9 @@
-import { Form, useParams } from "react-router-dom";
+import { Form, useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector} from 'react-redux'
 import { getProject, getLocation, getWeather } from "./api";
 import { useEffect, useState } from "react";
-import { getProjectAsync } from "./slices";
+import { changeStatusAction, deleteProjectAsync, getProjectAsync } from "./slices";
 import Popup from 'reactjs-popup';
 import ModalThreeSixty from "../../components/project/ModalThreeSixty";
 import ModalWeather from "../../components/project/ModalWeather";
@@ -20,27 +20,18 @@ const  basePath = "https://fastly-production.24c.in/webin/360";
 
 export default function ProjectDetail() {
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const {project} = useSelector(state => state.project);
   const [weather, setWeather] = useState({});
   const { projectId } = useParams()
   const [show, setShow] = useState(false);
-  const postalCode = project.postalCode;
+
+  const postalCode = project.postalCode || 0;
 
   useEffect(() => {
     dispatch(getProjectAsync({projectId: projectId}))
   }, [projectId])
-
-  useEffect(() => {
-    var location = async () => {
-      var res = await getLocation('04000');
-      var result = JSON.parse(res);
-      var dataLocation = result[0];
-      var weatherByLatLon = await getWeather(dataLocation.lat, dataLocation.lon)
-      setWeather(weatherByLatLon)
-    }
-    location()
-  }, [])
 
   const handleClose = () => setShow(false);
   const handleShow = (postalCode) => {
@@ -49,19 +40,21 @@ export default function ProjectDetail() {
     var location = async () => {
       var res = await getLocation(postalCode);
       var result = JSON.parse(res);
-      console.log('result', result)
       var dataLocation = {}
       if(result.length > 0) {
-        console.log('????/')
         dataLocation = result[0]
       }
-      console.log('datalocation', dataLocation)
       var weatherByLatLon = await getWeather(dataLocation?.lat, dataLocation?.lon)
       setWeather(weatherByLatLon)
     }
     location()
   };
 
+  const handleDelete = (projectId) => {
+    dispatch(deleteProjectAsync(projectId))
+    dispatch(changeStatusAction())
+    navigate(`/`);
+  }
 
   return (
     <>
@@ -88,12 +81,12 @@ export default function ProjectDetail() {
             <Form action="edit">
               <button type="submit">Edit</button>
             </Form>
-            <Form
+            {/* <Form
               method="post"
               action="delete"
-            >
-              <button type="submit">Delete</button>
-            </Form>
+            > */}
+              <button value={projectId} type="submit" onClick={(e) => {handleDelete(e.target.value)}}>Delete</button>
+            {/* </Form> */}
           </div>
           <Modal show={show}>
                   <ModalHeader title='Weather infomation'/>
