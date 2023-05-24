@@ -1,3 +1,4 @@
+// default view screen project
 export default function Index() {
     return (
       <p id="zero-state">
@@ -5,4 +6,4 @@ export default function Index() {
         <br />
       </p>
     );
-  }
+}

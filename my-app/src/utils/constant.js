@@ -1,0 +1,1 @@
+export const  basePath = "https://fastly-production.24c.in/webin/360";

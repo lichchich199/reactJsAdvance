@@ -1,23 +1,23 @@
 {
     "line": {
-        "OrderNumber": {
-            "title": "OrderNumber",
+        "Name": {
+            "title": "Name",
             "type": "Text",
             "length": 255,
             "required": false,
             "editable": true,
             "blankable": true
         },
-        "OrderName": {
-            "title": "OrderName",
+        "Type": {
+            "title": "Type",
             "type": "Text",
             "length": 255,
             "required": false,
             "editable": true,
             "blankable": true
         },
-        "OrderPrice": {
-            "title": "OrderPrice",
+        "PostalCode": {
+            "title": "PostalCode",
             "type": "Text",
             "length": 255,
             "required": false,

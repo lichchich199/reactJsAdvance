@@ -4,14 +4,13 @@ import Project from "./views/Project"
 import ProjectAdd from "./features/projects/ProjectAdd";
 import ProjectDetail from "./features/projects/ProjectDetail";
 import ProjectEdit from "./features/projects/ProjectEdit";
-import { loader as rootLoader} from "./features/projects/ProjectList";
 
+// define router
 export const routes = [
     {
         path: "/",
         element: <Project/>,
         errorElement: <ErrorPage/>,
-        loader: rootLoader,
         children: [
             {
                 index: true,

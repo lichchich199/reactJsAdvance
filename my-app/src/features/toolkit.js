@@ -1,6 +1,7 @@
 import { createSlice, configureStore, createAsyncThunk as _createAsyncThunk} from '@reduxjs/toolkit'
 import { toggleLoadingStatus } from './global/slices'
 
+// custom method createAsyncThunk to handle loading each action
 const createAsyncThunk = (name, callback, errorCallback) => {
     return _createAsyncThunk(name, async (payload, thunkAPI) => {
         try {

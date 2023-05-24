@@ -1,12 +1,13 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
 
+// form add edit project
  export default function FormProject(props) {
     const navigate = useNavigate();
 
-    // use yup to create a validattion schema
+    // validate
     const validationSchema = Yup.object().shape({
         name: Yup.string()
             .required('name is required'),
@@ -22,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
             .required('Start Date is required'),
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
+    // values default
     if(props.valuesEdit) {
         formOptions.values = props.valuesEdit
     }

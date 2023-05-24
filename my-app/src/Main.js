@@ -6,7 +6,6 @@ import store from "./store"
 import {routes} from './router'
 import Routing from "./Routing";
 
-
 function Main() {
 let router = createBrowserRouter(routes)
   return (

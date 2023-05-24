@@ -1,3 +1,4 @@
+// get project
 export const getProject = async (params) => {
     if(!params || !params.projectId) {
         return {}
@@ -11,7 +12,7 @@ export const getProject = async (params) => {
         })
     }).then(res => res.json()).catch()
 }
-
+// get list project
 export const getProjects = async (name) => {
     const response = await fetch('http://localhost:3000/api/project', {
         method: 'POST',
@@ -23,7 +24,7 @@ export const getProjects = async (name) => {
     }).then(res => res.json())
     return  response
 }
-
+// create project
 export const createProject = async (params) => {
     var body = {
         "mode": "ADD",
@@ -42,7 +43,7 @@ export const createProject = async (params) => {
     }).then(res => res.json())
     return  response
 }
-
+// update project
 export const updateProject = async (params) => {
     var body = {
         "mode": "EDIT",
@@ -62,7 +63,7 @@ export const updateProject = async (params) => {
     }).then(res => res.json())
     return  response
 }
-
+// delete project
 export const deleteProject = async (id) => {
     const response = await fetch('http://localhost:3000/api/project', {
         method: 'POST',
@@ -74,7 +75,7 @@ export const deleteProject = async (id) => {
     }).then(res => res.json())
     return  response
 }
-
+// get location by postalCode
 export const getLocation = async (postalCode) => {
     const response = await fetch('http://localhost:3000/api/location', {
         method: 'POST',
@@ -85,7 +86,7 @@ export const getLocation = async (postalCode) => {
     }).then(res => res.json())
     return  response
 }
-
+// get weather by lat lon
 export const getWeather = async (lat, lon) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=8d2de98e089f1c28e1a22fc19a24ef04`).then(res => res.json())
     return  response

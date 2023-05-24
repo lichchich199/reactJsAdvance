@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
+import { useCookies } from 'react-cookie'
 import { useDispatch, useSelector} from 'react-redux'
+import { Form, NavLink, useNavigate, useSearchParams, useSubmit } from "react-router-dom";
 import { faList, faTable } from '@fortawesome/fontawesome-free-solid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { Form, NavLink, useNavigate, useSearchParams, useSubmit } from "react-router-dom";
-import { getProjects } from "./api";
 import { getProjectsAsync } from "./slices";
-
-import { useCookies } from 'react-cookie'
-
-export async function loader({request }) {
-    const url = new URL(request.url);
-    const q = url.searchParams.get("q");
-    const contacts = await getProjects(q);
-    return { contacts, q };
-  }
 
 export default function ProjectList() {
     const navigate = useNavigate()
@@ -23,11 +14,13 @@ export default function ProjectList() {
     const [selectedRow, setSelectedRow] = useState(-1);
     const [searchParams, setSearchParams] = useSearchParams();
     const {projects, statusAction} = useSelector(state => state.project);
+    // get search param from url & cookie
     var q = searchParams.get("q") 
     const [cookies, setCookie, removeCookie] = useCookies(['q']);
-    var qSession = cookies.q
+    var qSession = cookies.q;
     const [nameSearch, setNameSearch] = useState(q || qSession) 
 
+    // handle set param search to cookie
     useEffect(() => {
         if((q !== null && !qSession) ||( q !== null && qSession && qSession !== q)) {
             setCookie("q", q)
@@ -35,24 +28,29 @@ export default function ProjectList() {
         }
     }, [q])
 
+    // dispatch get list project with search condition
     useEffect(() => {
         dispatch(getProjectsAsync(nameSearch))
-      }, [q, statusAction, nameSearch])
+    }, [q, statusAction, nameSearch])
+
+    // handle click row to redirect to detail project
     function handleRowClick(id) {
         setSelectedRow(id)
       return navigate(`projects/${id}`);
     }
 
+    // handle to change type of view list (grid and list)
     function handleList(value) {
         if(value !== listStatus) {
             setListStatus(value)
         }
     }
+    // submit search
     const submit = useSubmit();
     return (
         <>
             <div>
-                <Form id="search-Form" role="search">
+                <Form id="search-Form" role="search" action="/">
                     <input
                     id="q"
                     aria-label="Search contacts"

@@ -4,6 +4,7 @@ import './modalThreeSixty.css'
 import ThreeSixty from "react-360-view";
 import { Link } from "react-router-dom";
 
+// modal image 360
 export default function ModalThreeSixty({ close, imagePath }) {
   return (
     <div className="test">

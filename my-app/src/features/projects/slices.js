@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "../toolkit";
 import { createProject, deleteProject, getProject, getProjects, updateProject } from "./api";
 
+// initial state
 const initialState = {
     status: false,
     statusAction: false,
@@ -8,6 +9,7 @@ const initialState = {
     projects: []
 }
 
+// create async action get project
 export const getProjectAsync = createAsyncThunk(
     'projects/getProject',
     async(params) => {
@@ -15,7 +17,7 @@ export const getProjectAsync = createAsyncThunk(
         return res
     }
 )
-
+// create async action list project
 export const getProjectsAsync = createAsyncThunk(
     'projects/getProjects',
     async(name) => {
@@ -23,7 +25,7 @@ export const getProjectsAsync = createAsyncThunk(
         return res
     }
 )
-
+// create async action create project
 export const createProjectAsync = createAsyncThunk(
     'projects/createProject',
     async(params) => {
@@ -31,7 +33,7 @@ export const createProjectAsync = createAsyncThunk(
         return res
     }
 )
-
+// create async action update project
 export const updateProjectAsync = createAsyncThunk(
     'projects/updateProject',
     async(params) => {
@@ -39,7 +41,7 @@ export const updateProjectAsync = createAsyncThunk(
         return res
     }
 )
-
+// create async action delete project
 export const deleteProjectAsync = createAsyncThunk(
     'projects/deleteProject',
     async(params) => {
@@ -48,7 +50,7 @@ export const deleteProjectAsync = createAsyncThunk(
         return res
     }
 )
-
+// create slice
 export const projectSlice = createSlice({
     name: 'project',
     initialState,
@@ -112,8 +114,7 @@ export const projectSlice = createSlice({
     }
 })
 
-
-
+// export action
 export const {
     cleanup,
     changeStatusAction

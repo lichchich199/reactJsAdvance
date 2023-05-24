@@ -1,6 +1,7 @@
 import React from "react";
 import  "./loading.css";
 
+// common loading
 export default function LoadingSpinner() {
   return (
     <div className='spinnerContainer'>

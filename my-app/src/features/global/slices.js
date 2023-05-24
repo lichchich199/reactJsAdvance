@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+// init state
 const initialState ={
     loadingStatus : false
 }
-
+// create slice global
 export const globalSlice = createSlice({
     name: 'global',
     initialState,
@@ -13,7 +13,7 @@ export const globalSlice = createSlice({
         }
     }
 })
-
+// export actions
 export const {
     toggleLoadingStatus
 } = globalSlice.actions

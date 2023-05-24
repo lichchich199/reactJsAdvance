@@ -13,10 +13,12 @@ export default function ProjectEdit() {
   const {project} = useSelector(state => state.project);
   const { projectId } = useParams()
 
+  // dispatch action get project to view
   useEffect(() => {
     dispatch(getProjectAsync({projectId: projectId}))
   }, [projectId])
 
+  // dispatch action update project and dispatch action to handle loading
   function dispatchEdit(data) {
       dispatch(updateProjectAsync(data))
       dispatch(changeStatusAction())

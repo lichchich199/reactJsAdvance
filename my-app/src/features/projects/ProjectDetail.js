@@ -1,22 +1,15 @@
-import { Form, useNavigate, useParams } from "react-router-dom";
-
-import { useDispatch, useSelector} from 'react-redux'
-import { getProject, getLocation, getWeather } from "./api";
-import { useEffect, useState } from "react";
-import { changeStatusAction, deleteProjectAsync, getProjectAsync } from "./slices";
 import Popup from 'reactjs-popup';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector} from 'react-redux'
+import { Form, useNavigate, useParams } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+
+import { getLocation, getWeather } from "./api";
+import { changeStatusAction, deleteProjectAsync, getProjectAsync } from "./slices";
+import Modal, { ModalBody, ModalFooter, ModalHeader } from "../../components/commons/modal/Modal";
 import ModalThreeSixty from "../../components/project/ModalThreeSixty";
 import ModalWeather from "../../components/project/ModalWeather";
-
-import Button from 'react-bootstrap/Button';
-import Modal, { ModalBody, ModalFooter, ModalHeader } from "../../components/commons/modal/Modal";
-
-export async function loader({ params }) {
-  console.log(params)
-  const contact = await getProject(params);
-  return { contact };
-}
-const  basePath = "https://fastly-production.24c.in/webin/360";
+import { basePath } from '../../utils/constant';
 
 export default function ProjectDetail() {
   const dispatch = useDispatch()
@@ -29,11 +22,14 @@ export default function ProjectDetail() {
 
   const postalCode = project.postalCode || 0;
 
+  // dispatch action get project when projectId change
   useEffect(() => {
     dispatch(getProjectAsync({projectId: projectId}))
   }, [projectId])
 
+  // handle close modal
   const handleClose = () => setShow(false);
+  // handle show modal
   const handleShow = (postalCode) => {
     setShow(true)
     var location = async () => {
@@ -48,7 +44,7 @@ export default function ProjectDetail() {
     }
     location()
   };
-
+  // handle delete project and dispatch action to handle loading
   const handleDelete = (projectId) => {
     dispatch(deleteProjectAsync(projectId))
     dispatch(changeStatusAction())
@@ -83,15 +79,15 @@ export default function ProjectDetail() {
               <button value={projectId} type="submit" onClick={(e) => {handleDelete(e.target.value)}}>Delete</button>
           </div>
           <Modal show={show}>
-                  <ModalHeader title='Weather infomation'/>
-                  <ModalBody>
-                    <ModalWeather data={weather}/>
-                  </ModalBody>
-                  <ModalFooter>
-                      <Button variant="secondary" onClick={handleClose}>
-                        Close
-                      </Button>
-                  </ModalFooter>
+              <ModalHeader title='Weather infomation'/>
+              <ModalBody>
+                <ModalWeather data={weather}/>
+              </ModalBody>
+              <ModalFooter>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+              </ModalFooter>
           </Modal>
         </div>
       </div>

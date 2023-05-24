@@ -1,4 +1,4 @@
-//content.js
+// modal weather infomation
 export default function ModalWeather({ data }) {
   return (
       <div className="content">
