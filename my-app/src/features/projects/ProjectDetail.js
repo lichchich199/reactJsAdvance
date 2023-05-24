@@ -80,12 +80,7 @@ export default function ProjectDetail() {
             <Form action="edit">
               <button type="submit">Edit</button>
             </Form>
-            {/* <Form
-              method="post"
-              action="delete"
-            > */}
               <button value={projectId} type="submit" onClick={(e) => {handleDelete(e.target.value)}}>Delete</button>
-            {/* </Form> */}
           </div>
           <Modal show={show}>
                   <ModalHeader title='Weather infomation'/>

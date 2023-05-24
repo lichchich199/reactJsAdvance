@@ -3,9 +3,11 @@ import { useDispatch, useSelector} from 'react-redux'
 import { faList, faTable } from '@fortawesome/fontawesome-free-solid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { Form, NavLink, useNavigate, useSearchParams, useSubmit } from "react-router-dom";
 import { getProjects } from "./api";
 import { getProjectsAsync } from "./slices";
+
+import { useCookies } from 'react-cookie'
 
 export async function loader({request }) {
     const url = new URL(request.url);
@@ -21,15 +23,21 @@ export default function ProjectList() {
     const [selectedRow, setSelectedRow] = useState(-1);
     const [searchParams, setSearchParams] = useSearchParams();
     const {projects, statusAction} = useSelector(state => state.project);
-
     var q = searchParams.get("q") 
-    console.log('sesion', sessionStorage.getItem("q"))
+    const [cookies, setCookie, removeCookie] = useCookies(['q']);
+    var qSession = cookies.q
+    const [nameSearch, setNameSearch] = useState(q || qSession) 
 
     useEffect(() => {
-        sessionStorage.setItem("q", q);
-        dispatch(getProjectsAsync(q))
-      }, [q, statusAction])
-      
+        if((q !== null && !qSession) ||( q !== null && qSession && qSession !== q)) {
+            setCookie("q", q)
+            setNameSearch(q)
+        }
+    }, [q])
+
+    useEffect(() => {
+        dispatch(getProjectsAsync(nameSearch))
+      }, [q, statusAction, nameSearch])
     function handleRowClick(id) {
         setSelectedRow(id)
       return navigate(`projects/${id}`);
@@ -40,9 +48,27 @@ export default function ProjectList() {
             setListStatus(value)
         }
     }
-
+    const submit = useSubmit();
     return (
         <>
+            <div>
+                <Form id="search-Form" role="search">
+                    <input
+                    id="q"
+                    aria-label="Search contacts"
+                    placeholder="Search By Name"
+                    type="search"
+                    name="q"
+                    defaultValue={nameSearch}
+                    onChange={(event) => {
+                        submit(event.currentTarget.form);
+                    }}
+                    />
+                </Form>
+                <Form action="projects/add">
+                    <button type="submit">New</button>
+                </Form>
+            </div>
             <div>
                 <div className="text-primary font-weight-bold"><h1>List Project</h1></div>
                 <div style={{display: 'flex', marginLeft: 'auto'}}>
