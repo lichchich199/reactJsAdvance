@@ -6,6 +6,7 @@ import { faList, faTable } from '@fortawesome/fontawesome-free-solid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { getProjectsAsync } from "./slices";
+import { formatDate } from "../../utils/formatDate";
 
 export default function ProjectList() {
     const navigate = useNavigate()
@@ -90,7 +91,7 @@ export default function ProjectList() {
                             <li key={contact.id} onClick={()=> {handleRowClick(contact.id)}}>
                                 <NavLink to={`projects/${contact.id}`} className={({ isActive, isPending }) => isActive ? "active" : isPending ? "pending" : ""} >
                                     {contact.name ? (<> {contact.name} </>) : (<i>No Name</i>)}{" "}
-                                    {contact.start_date && <span>{contact.start_date}</span>}
+                                    {contact.start_date && <span>{formatDate(contact.start_date)}</span>}
                                 </NavLink>
                             </li>
                         ))}
@@ -119,7 +120,7 @@ export default function ProjectList() {
                             <td>{contact.name}</td>
                             <td>{contact.type}</td>
                             <td>{contact.numberPeople}</td>
-                            <td>{contact.start_date}</td>
+                            <td>{formatDate(contact.start_date)}</td>
                         </tr>
                     ))}
                     </tbody>

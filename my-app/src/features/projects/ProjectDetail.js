@@ -10,6 +10,7 @@ import Modal, { ModalBody, ModalFooter, ModalHeader } from "../../components/com
 import ModalThreeSixty from "../../components/project/ModalThreeSixty";
 import ModalWeather from "../../components/project/ModalWeather";
 import { basePath } from '../../utils/constant';
+import { formatDate } from '../../utils/formatDate';
 
 export default function ProjectDetail() {
   const dispatch = useDispatch()
@@ -19,6 +20,8 @@ export default function ProjectDetail() {
   const [weather, setWeather] = useState({});
   const { projectId } = useParams()
   const [show, setShow] = useState(false);
+  const [showImage, setShowImage] = useState(false);
+
 
   const postalCode = project.postalCode || 0;
 
@@ -28,7 +31,11 @@ export default function ProjectDetail() {
   }, [projectId])
 
   // handle close modal
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+    setShowImage(false)
+  };
+  
   // handle show modal
   const handleShow = (postalCode) => {
     setShow(true)
@@ -44,6 +51,9 @@ export default function ProjectDetail() {
     }
     location()
   };
+  const handleShowImage = () => {
+    setShowImage(true)
+  };
   // handle delete project and dispatch action to handle loading
   const handleDelete = (projectId) => {
     dispatch(deleteProjectAsync(projectId))
@@ -58,9 +68,21 @@ export default function ProjectDetail() {
         <div>
           <img key={project.image} src={project.image || null} alt=""/>
         </div>
-        <Popup modal trigger={<button>View to 360</button>}>
+        {/* <Popup modal trigger={<button>View Image</button>}>
             {close => <ModalThreeSixty close={close} imagePath={basePath}/>}
-        </Popup>
+        </Popup> */}
+        <button variant="primary" onClick={()=> {handleShowImage()}}>View image</button>
+        <Modal show={showImage}>
+              <ModalHeader title='Image'/>
+              <ModalBody>
+                <img src={project.image} alt='noimage'></img>
+              </ModalBody>
+              <ModalFooter>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+              </ModalFooter>
+          </Modal>
         <div>
           <h1>{project.type || project.name ? (<>{project.name}</>) : (<i>No Name</i>)}</h1>
           {

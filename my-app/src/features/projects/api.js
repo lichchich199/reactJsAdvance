@@ -33,7 +33,7 @@ export const createProject = async (params) => {
         "numberPeople":  parseInt(params.numberPeople),
         "postalCode": parseInt(params.postalCode),
         "image": params.image,
-        "start_date": new Date(params.startDate),
+        "start_date": new Date(params.start_date),
     }
     console.log('body create:', body)
     const response = await fetch('http://localhost:3000/api/project', {
@@ -53,7 +53,7 @@ export const updateProject = async (params) => {
         "numberPeople":  parseInt(params.numberPeople),
         "postalCode": parseInt(params.postalCode),
         "image": params.image,
-        "start_date": new Date(params.startDate),
+        "start_date": new Date(params.start_date),
     }
     console.log(body)
     const response = await fetch('http://localhost:3000/api/project', {

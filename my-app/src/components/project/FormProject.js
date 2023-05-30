@@ -19,7 +19,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
             .required('Postal Code is required'),
         numberPeople: Yup.string()
             .required('Number People is required'),
-        startDate: Yup.string()
+        start_date: Yup.string()
             .required('Start Date is required'),
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
@@ -73,7 +73,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
                 <div className="form-row">
                     <div className="form-group col">
                         <label>Start Date</label>
-                        <input name="startDate" type="date" {...register('startDate')} className={`form-control ${errors.startDate ? 'is-invalid' : ''}`} disabled={props?.mode === 'CONFIRM'}/>
+                        <input name="start_date" type="date" {...register('start_date')} className={`form-control ${errors.start_date ? 'is-invalid' : ''}`} disabled={props?.mode === 'CONFIRM'}/>
                         <div className="invalid-feedback">{errors.startDate?.message}</div>
                     </div>
                 </div>

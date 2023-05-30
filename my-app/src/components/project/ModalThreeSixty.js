@@ -14,12 +14,16 @@ export default function ModalThreeSixty({ close, imagePath }) {
         <div className="header"> Modal Title </div>
         <div className="content">
           {" "}
-              <ThreeSixty
-                  amount={100}
-                  imagePath={imagePath}
-                  fileName="output_{index}.jpeg"
-                  spinReverse
-              />
+              
+              {
+        <ThreeSixty
+            amount={100}
+            imagePath={imagePath}
+            fileName="output_{index}.jpeg"
+            spinReverse
+        /> || 'aaa'
+      }
+                
         </div>
       </div>
   );

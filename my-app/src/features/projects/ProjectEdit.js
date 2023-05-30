@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { changeStatusAction, getProjectAsync, updateProjectAsync } from "./slices";
 import FormProject from "../../components/project/FormProject";
+import { formatDate } from "../../utils/formatDate";
   
 export default function ProjectEdit() {
   const dispatch = useDispatch()
@@ -18,6 +19,11 @@ export default function ProjectEdit() {
     dispatch(getProjectAsync({projectId: projectId}))
   }, [projectId])
 
+  const getValue = (obj) => {
+    var newProject = Object.assign({}, obj)
+    newProject.start_date = formatDate(obj.start_date)
+    return newProject
+  }
   // dispatch action update project and dispatch action to handle loading
   function dispatchEdit(data) {
       dispatch(updateProjectAsync(data))
@@ -25,6 +31,6 @@ export default function ProjectEdit() {
       navigate(-1);
   }
   return (
-    <FormProject valuesEdit={project} onSubmit={dispatchEdit} titleButton='Edit'/>
+    <FormProject valuesEdit={getValue(project)} onSubmit={dispatchEdit} titleButton='Edit'/>
   );
 }
