@@ -1,7 +1,15 @@
-export default function Layout() {
+import Header from "./Header";
+import Footer from "./Footer";
+
+export default function Layout(props) {
     return (
-      <>
-        <h1>This is Layout</h1>
-      </>
+      <div style={{
+        width:'100%',
+        height: '100%'
+      }}>
+        <Header/>
+        {props.children}
+        <Footer/>
+      </div>
     );
   }
