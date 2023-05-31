@@ -64,15 +64,15 @@ export default function ProjectDetail() {
   return (
     <>
       {
-      <div id="project">
-        <div>
-          <img key={project.image} src={project.image || null} alt=""/>
-        </div>
-        {/* <Popup modal trigger={<button>View Image</button>}>
-            {close => <ModalThreeSixty close={close} imagePath={basePath}/>}
-        </Popup> */}
-        <button variant="primary" onClick={()=> {handleShowImage()}}>View image</button>
-        <Modal show={showImage}>
+        <div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+          <div>
+            <img style={{cursor:'pointer', borderRadius: '1em', width: '60%'}} alt="No Image" onClick={()=> {handleShowImage()}} key={project.image} src={project.image || null} />
+          </div>
+          <Modal show={showImage}>
               <ModalHeader title='Image'/>
               <ModalBody>
                 <img src={project.image} alt='noimage'></img>
@@ -83,24 +83,26 @@ export default function ProjectDetail() {
                   </Button>
               </ModalFooter>
           </Modal>
-        <div>
-          <h1>{project.type || project.name ? (<>{project.name}</>) : (<i>No Name</i>)}</h1>
-          {
-            project.numberPeople && <p>Number People: {project.numberPeople}</p>
-          }
-          {
-            project.postalCode && <span>Postal Code: {project.postalCode}</span>
-          } 
-          {
-            project.postalCode && <Button variant="primary" value={postalCode} onClick={(e)=> {handleShow(e.target.value)}}>View weather infomation</Button>
-          }
-          <div>
-            <Form action="edit">
-              <button type="submit">Edit</button>
+					</div>
+					<div class="details col-md-6">
+						<h3>{project.name ? (<>{project.name}</>) : (<i>No Name</i>)}</h3>
+						<div class="type">
+							<span>{project.type ? (<>{project.type}</>) : (<i>No Type</i>)}</span>
+						</div>
+						<h4 class="numberPeople">number of employees: <span>{project.numberPeople} </span></h4>
+						<h5 class="sizes">postal code: <span>{ project.postalCode} </span></h5>
+						<div class="action" style={{display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '2em'}}>
+              {
+                project.postalCode && <button variant="primary" value={postalCode} onClick={(e)=> {handleShow(e.target.value)}}>View weather infomation</button>
+              }
+              <Form action="edit">
+              <button type="submit btn btn-default">Edit</button>
             </Form>
               <button value={projectId} type="submit" onClick={(e) => {handleDelete(e.target.value)}}>Delete</button>
-          </div>
-          <Modal show={show}>
+						</div>
+            <Modal show={show}>
               <ModalHeader title='Weather infomation'/>
               <ModalBody>
                 <ModalWeather data={weather}/>
@@ -111,8 +113,13 @@ export default function ProjectDetail() {
                   </Button>
               </ModalFooter>
           </Modal>
-        </div>
-      </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+      
       }
     </>
   );

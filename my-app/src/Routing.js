@@ -8,7 +8,7 @@ export default function Routing(props) {
   return (
     <>
         {loadingStatus && <LoadingSpinner />}
-        <div className={(loadingStatus ? 'loading' : '') + ' wrapLayout'}>
+        <div className=' wrapLayout'>
             {props.children}
         </div>
     </>
